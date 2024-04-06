@@ -1,0 +1,7 @@
+# ESP-IDF Partition Table
+# Using the default Single factory app, no OTA partition, extending with a spiffs partition, used by the wakenet models
+# Name,   Type, SubType, Offset,  Size, Flags
+nvs,      data, nvs,            , 0x6000,
+phy_init, data, phy,            , 0x1000,
+factory,  app,  factory,        , 2000K,
+model,  data, spiffs,           , 5000K,
