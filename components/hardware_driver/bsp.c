@@ -1,12 +1,15 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
 #include "bsp.h"
+#include "esp_log.h"
 #include "esp32_s3_devkitc_config.h"
 #include "driver/i2s_std.h"
 #include "driver/i2s_common.h"
 
+#define TAG "bsp"
+
 static SemaphoreHandle_t i2s_mutex = NULL;
-static i2s_chan_handle_t rx_handle;
+static i2s_chan_handle_t rx_handle = NULL;
 
 static esp_err_t init_i2s_mutex(void)
 {
@@ -38,6 +41,34 @@ static esp_err_t i2s_init(i2s_port_t i2s_port_num, uint32_t sample_rate, int cha
     return ret;
 }
 
+static esp_err_t i2s_read_data(int16_t *buffer, int buffer_size)
+{
+    esp_err_t ret = ESP_OK;
+    size_t bytes_read;
+
+    /* The microphones output is 24-bit 2's complement data, the upper 8-bits are undefined due to the high-impedance state */
+    int32_t *temp_buffer = (int32_t *)calloc(buffer_size, sizeof(int32_t));
+    if (temp_buffer == NULL)
+    {
+        ret = ESP_ERR_NO_MEM;
+        return ret;
+    }
+
+    ret = i2s_channel_read(rx_handle, temp_buffer, buffer_size * sizeof(int32_t), &bytes_read, portMAX_DELAY);
+    if (ret != ESP_OK)
+    {
+        return ret;
+    }
+
+    /* Mapping the the upper 24-bit microphone data into the 16-bit int buffer */
+    for (int i = 0; i < buffer_size; i++)
+    {
+        buffer[i] = (temp_buffer[i] >> 16);
+    }
+    free(temp_buffer);
+    return ret;
+}
+
 static esp_err_t i2s_deinit(i2s_port_t i2s_num)
 {
     esp_err_t ret = ESP_OK;
@@ -60,6 +91,19 @@ esp_err_t bsp_board_init(uint32_t sample_rate, int channel_format, int bits_per_
 {
     esp_err_t ret = ESP_OK;
     ret |= i2s_init(I2S_NUM_1, sample_rate, channel_format, bits_per_chan);
+    if(ret == ESP_OK){
+        ESP_LOGI(TAG, "I2S peripherial intialized successfully.");
+    }
+    else{
+        ESP_LOGI(TAG, "Error while initializing I2S peripherial: %s", esp_err_to_name(ret));
+    }
+    return ret;
+}
+
+esp_err_t bsp_read_i2s_data(int16_t *buffer, int buffer_size)
+{
+    esp_err_t ret = ESP_OK;
+    ret |= i2s_read_data(buffer, buffer_size);
     return ret;
 }
 
