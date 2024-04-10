@@ -81,7 +81,7 @@ static void feed_task(void *arg)
 
     ESP_LOGI(TAG, "feed_task started");
     while (1) {
-        ESP_ERROR_CHECK(bsp_read_i2s_data(i2s_buff, audio_chunksize * feed_channel));
+        ESP_ERROR_CHECK(bsp_read_i2s_data(i2s_buff, audio_chunksize * feed_channel * sizeof(int16_t)));
         _afe_handle->feed(afe_data, i2s_buff);
     }
 
