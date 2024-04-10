@@ -46,23 +46,29 @@ static esp_err_t i2s_read_data(int16_t *buffer, int buffer_size)
     esp_err_t ret = ESP_OK;
     size_t bytes_read;
 
-    /* The microphones output is 24-bit 2's complement data, the upper 8-bits are undefined due to the high-impedance state */
-    int32_t *temp_buffer = (int32_t *)calloc(buffer_size, sizeof(int32_t));
-    if (temp_buffer == NULL)
-    {
+    /* buffer_size in measured in bytes, so the number of samples = buffer_size / sizeof(int16_t), number of 16-bit integers */
+    int sample_num = (buffer_size / sizeof(int16_t));
+
+    /**
+     * The microphones output is 24-bit 2's complement data, the upper 8-bits are undefined due to the high-impedance state.
+     * The allocated memory for the microphone's output will store sample_num 32-bit integers (same amount of sample as param. buffer)
+    */
+    int32_t *temp_buffer = (int32_t *)calloc(sample_num, sizeof(int32_t));
+    if (temp_buffer == NULL) {
         ret = ESP_ERR_NO_MEM;
         return ret;
     }
 
-    ret = i2s_channel_read(rx_handle, temp_buffer, buffer_size * sizeof(int32_t), &bytes_read, portMAX_DELAY);
-    if (ret != ESP_OK)
-    {
+    ret = i2s_channel_read(rx_handle, temp_buffer, sample_num * sizeof(int32_t), &bytes_read, portMAX_DELAY);
+    if (ret != ESP_OK) {
         return ret;
     }
 
-    /* Mapping the the upper 24-bit microphone data into the 16-bit int buffer */
-    for (int i = 0; i < buffer_size; i++)
-    {
+    /**
+     * Mapping the the upper 24-bit microphone data into the 16-bit int buffer.
+     * Discarding the lower 8 high-impedance bit, and shifting the upper 24-bit values into 16-bit integers.
+    */
+    for (int i = 0; i < sample_num; i++) {
         buffer[i] = (temp_buffer[i] >> 16);
     }
     free(temp_buffer);
