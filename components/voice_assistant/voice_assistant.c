@@ -111,6 +111,9 @@ void start_voice_assistant(void)
 {
     ESP_ERROR_CHECK(bsp_board_init(16000, 2, 32));
     ESP_ERROR_CHECK(flash_models());
+
+    xSemaphoreTake(sr_init_mutex, pdMS_TO_TICKS(0));
     xTaskCreatePinnedToCore(&feed_task, "feed", 8 * 1024, (void *)_afe_data, 5, NULL, 0);
     xTaskCreatePinnedToCore(&detect_task, "detect", 4 * 1024, (void *)_afe_data, 5, NULL, 1);
+    xSemaphoreGive(sr_init_mutex);
 }
