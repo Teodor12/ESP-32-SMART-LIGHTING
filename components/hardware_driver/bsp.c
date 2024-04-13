@@ -66,11 +66,12 @@ static esp_err_t i2s_read_data(int16_t *buffer, int buffer_size)
 
     /**
      * Mapping the the upper 24-bit microphone data into the 16-bit int buffer.
-     * Discarding the lower 8 high-impedance bit, and shifting the upper 24-bit values into 16-bit integers.
+     * Discarding the lower 8 high-impedance bit, then shifting the upper 24-bit values into 16-bit integers.
     */
     for (int i = 0; i < sample_num; i++) {
-        buffer[i] = (temp_buffer[i] >> 16);
+        buffer[i] = (int16_t)((temp_buffer[i] >> 16) | ((temp_buffer[i] >> 15) & 0xFFFF));
     }
+
     free(temp_buffer);
     return ret;
 }
