@@ -17,7 +17,7 @@ void start_voice_assistant(void);
         .voice_communication_agc_init = false,                                                     \
         .voice_communication_agc_gain = 15,                                                        \
         .vad_mode = VAD_MODE_3,                                                                    \
-        .wakenet_model_name = "wn9_hiesp",                                                         \
+        .wakenet_model_name = "wn9_sophia_tts",                                                    \
         .wakenet_mode = DET_MODE_2CH_90,                                                           \
         .afe_mode = SR_MODE_HIGH_PERF,                                                             \
         .afe_perferred_core = 0,                                                                   \

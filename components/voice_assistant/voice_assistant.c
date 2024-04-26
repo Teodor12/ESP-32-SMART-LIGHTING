@@ -54,14 +54,12 @@ static esp_err_t sr_flash_models(void)
 
     /* Load models from the proper SPIFFS partition of the flash memory */
     srmodel_list_t *models = esp_srmodel_init("model");
-    if (models == NULL)
-    {
+    if (models == NULL) {
         ESP_LOGE(TAG, "Unable to load model(s)");
         return ESP_FAIL;
     }
 
-    for (int i = 0; i < models->num; i++)
-    {
+    for (int i = 0; i < models->num; i++) {
         ESP_LOGI(TAG, "%s", models->model_name[i]);
     }
 
@@ -125,13 +123,9 @@ static void detect_task(void *arg)
     while (1) {
         afe_fetch_result_t *res = _afe_handle->fetch(afe_data);
         if (res->wakeup_state == WAKENET_DETECTED) {
-
             printf("wakeword detected\n");
-
             detect_flag = true;
-            /* Clean the model's status */
             multinet->clean(mn_model_data);
-
             _afe_handle->disable_wakenet(afe_data);
         }
 
@@ -160,7 +154,7 @@ static void detect_task(void *arg)
                 /* Re-enable wakenet if the detecting-time of multinet has expired. */
                 _afe_handle->enable_wakenet(afe_data);
                 detect_flag = false;
-                ESP_LOGI(TAG, "\n-----------awaits to be waken up-----------\n");
+                ESP_LOGI(TAG, "-----------awaits to be waken up-----------\n");
             }
         }
 
@@ -177,8 +171,6 @@ void start_voice_assistant(void)
     ESP_ERROR_CHECK(bsp_board_init(16000, 2, 32));
     ESP_ERROR_CHECK(flash_models());
 
-    xSemaphoreTake(sr_init_mutex, pdMS_TO_TICKS(0));
     xTaskCreatePinnedToCore(&feed_task, "feed", 8 * 1024, (void *)_afe_data, 5, NULL, 0);
     xTaskCreatePinnedToCore(&detect_task, "detect", 4 * 1024, (void *)_afe_data, 5, NULL, 1);
-    xSemaphoreGive(sr_init_mutex);
 }
