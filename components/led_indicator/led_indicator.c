@@ -49,7 +49,7 @@ static led_strip_handle_t configure_led(void)
 
 static esp_err_t turn_on(struct led_indicator *led_indicator)
 {
-    if(xSemaphoreTake(led_indicator_mutex, pdMS_TO_TICKS(0)) != pdTRUE){
+    if(xSemaphoreTake(led_indicator_mutex, pdMS_TO_TICKS(15)) != pdTRUE){
         return ESP_FAIL;
     };
     led_indicator->led_state = true;
@@ -59,7 +59,7 @@ static esp_err_t turn_on(struct led_indicator *led_indicator)
 
 static esp_err_t turn_off(struct led_indicator *led_indicator)
 {
-    if (xSemaphoreTake(led_indicator_mutex, pdMS_TO_TICKS(0)) != pdTRUE){
+    if (xSemaphoreTake(led_indicator_mutex, pdMS_TO_TICKS(15)) != pdTRUE){
         return ESP_FAIL;
     };
     led_indicator->led_state = false;
