@@ -10,6 +10,7 @@
 #include "esp_process_sdkconfig.h"
 #include "esp_log.h"
 #include "bsp.h"
+#include "led_indicator.h"
 
 #include <stdbool.h>
 
@@ -119,14 +120,18 @@ static void detect_task(void *arg)
     assert(mu_chunksize == afe_chunksize);
     bool detect_flag = false;
 
+    led_indicator_t led_indicator = led_indicator_init();
+    ESP_ERROR_CHECK(led_indicator_start(led_indicator));
+
     ESP_LOGI(TAG, "detect_task started");
     while (1) {
         afe_fetch_result_t *res = _afe_handle->fetch(afe_data);
         if (res->wakeup_state == WAKENET_DETECTED) {
             printf("wakeword detected\n");
-            detect_flag = true;
             multinet->clean(mn_model_data);
             _afe_handle->disable_wakenet(afe_data);
+            led_indicator_turn_on(led_indicator);
+            detect_flag = true;
         }
 
         if(detect_flag == true)
@@ -150,10 +155,10 @@ static void detect_task(void *arg)
 
             if (mn_state == ESP_MN_STATE_TIMEOUT) {
                 esp_mn_results_t *mn_result = multinet->get_results(mn_model_data);
-                ESP_LOGI(TAG, "timeout, string:%s\n", mn_result->string);
                 /* Re-enable wakenet if the detecting-time of multinet has expired. */
                 _afe_handle->enable_wakenet(afe_data);
                 detect_flag = false;
+                led_indicator_turn_off(led_indicator);
                 ESP_LOGI(TAG, "-----------awaits to be waken up-----------\n");
             }
         }
@@ -161,16 +166,22 @@ static void detect_task(void *arg)
 
     }
 }
-esp_err_t flash_models()
+
+static esp_err_t init_sr_tasks(void)
 {
-    return sr_flash_models();
+    ESP_ERROR_CHECK(sr_flash_models());
+
+    esp_err_t ret = ESP_OK;
+
+    xSemaphoreTake(sr_init_mutex, pdMS_TO_TICKS(10));
+    ret = (xTaskCreatePinnedToCore(&feed_task, "feed", 8 * 1024, (void *)_afe_data, 10, NULL, 0) == pdTRUE) ? ESP_OK : ESP_FAIL;
+    ret = (xTaskCreatePinnedToCore(&detect_task, "detect", 4 * 1024, (void *)_afe_data, 10, NULL, 1) == pdTRUE) ? ESP_OK : ESP_FAIL;
+    xSemaphoreGive(sr_init_mutex);
+    return ret;
 }
 
 void start_voice_assistant(void)
 {
     ESP_ERROR_CHECK(bsp_board_init(16000, 2, 32));
-    ESP_ERROR_CHECK(flash_models());
-
-    xTaskCreatePinnedToCore(&feed_task, "feed", 8 * 1024, (void *)_afe_data, 5, NULL, 0);
-    xTaskCreatePinnedToCore(&detect_task, "detect", 4 * 1024, (void *)_afe_data, 5, NULL, 1);
+    ESP_ERROR_CHECK(init_sr_tasks());
 }
