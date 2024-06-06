@@ -2674,7 +2674,7 @@
 				)
 			)
 		)
-		(property "Value" "1K"
+		(property "Value" "100"
 			(at 128.27 121.92 0)
 			(effects
 				(font
@@ -3147,7 +3147,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9559a72d-f853-4dc0-81b9-7f25db6657e4")
-		(property "Reference" "RGND"
+		(property "Reference" "RGND1"
 			(at 131.318 85.09 0)
 			(effects
 				(font
@@ -3155,7 +3155,7 @@
 				)
 			)
 		)
-		(property "Value" "1K"
+		(property "Value" "10K"
 			(at 130.81 85.09 0)
 			(effects
 				(font
@@ -3200,7 +3200,7 @@
 		(instances
 			(project "sr_circuit"
 				(path "/cfda6094-67cc-46d2-af38-a5b6e7551bb5"
-					(reference "RGND")
+					(reference "RGND1")
 					(unit 1)
 				)
 			)
@@ -3437,7 +3437,7 @@
 				)
 			)
 		)
-		(property "Value" "1K"
+		(property "Value" "100"
 			(at 127 74.93 0)
 			(effects
 				(font
@@ -3914,7 +3914,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "fbaccf9f-e35a-4a4b-a773-2ec8b3134b29")
-		(property "Reference" "RGND1"
+		(property "Reference" "RGND2"
 			(at 132.588 132.08 0)
 			(effects
 				(font
@@ -3922,7 +3922,7 @@
 				)
 			)
 		)
-		(property "Value" "1K"
+		(property "Value" "10K"
 			(at 132.08 132.08 0)
 			(effects
 				(font
@@ -3967,7 +3967,7 @@
 		(instances
 			(project "sr_circuit"
 				(path "/cfda6094-67cc-46d2-af38-a5b6e7551bb5"
-					(reference "RGND1")
+					(reference "RGND2")
 					(unit 1)
 				)
 			)
