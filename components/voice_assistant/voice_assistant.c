@@ -1,4 +1,4 @@
-#include "voice_assistant.h"
+#include <stdbool.h>
 #include "esp_wn_iface.h"
 #include "esp_wn_models.h"
 #include "esp_afe_sr_models.h"
@@ -9,10 +9,10 @@
 #include "model_path.h"
 #include "esp_process_sdkconfig.h"
 #include "esp_log.h"
+#include "voice_assistant.h"
 #include "bsp.h"
 #include "led_indicator.h"
-
-#include <stdbool.h>
+#include "pwm_output.h"
 
 #define TAG "voice_assistant"
 
@@ -65,9 +65,9 @@ static esp_err_t sr_flash_models(void)
     }
 
     /* Select the wakenet model used for speech recognition*/
-    char *wn_name = esp_srmodel_filter(models, ESP_WN_PREFIX, "wn9_sophia_tts");
+    char *wn_name = esp_srmodel_filter(models, ESP_WN_PREFIX, "wn9_alexa");
     wakenet = esp_wn_handle_from_name(wn_name);
-    model_iface_data_t *wn_model_data = wakenet->create("wn9_sophia_tts", DET_MODE_2CH_90);
+    model_iface_data_t *wn_model_data = wakenet->create("wn9_alexa", DET_MODE_2CH_95);
 
     /* Select the multit used for speech recognition*/
     char *mn_name = esp_srmodel_filter(models, ESP_MN_PREFIX, ESP_MN_ENGLISH);
@@ -145,11 +145,9 @@ static void detect_task(void *arg)
             if (mn_state == ESP_MN_STATE_DETECTED) {
                 /* Check the results calculated by Multinet */
                 esp_mn_results_t *mn_result = multinet->get_results(mn_model_data);
-                for (int i = 0; i < mn_result->num; i++)
-                {
-                    printf("TOP %d, command_id: %d, phrase_id: %d, string: %s, prob: %f\n",
-                           i + 1, mn_result->command_id[i], mn_result->phrase_id[i], mn_result->string, mn_result->prob[i]);
-                }
+                printf("Command_id: %d, string: %s\n", mn_result->command_id[0], mn_result->string);
+                int command_id = (mn_result->command_id[0]);
+                (void) update_pwm_outputs(command_id);
                 ESP_LOGI(TAG, "-----------listening-----------\n");
             }
 
@@ -182,6 +180,7 @@ static esp_err_t init_sr_tasks(void)
 
 void start_voice_assistant(void)
 {
+    ESP_ERROR_CHECK(init_pwm_outputs());
     ESP_ERROR_CHECK(bsp_board_init(16000, 2, 32));
     ESP_ERROR_CHECK(init_sr_tasks());
 }
