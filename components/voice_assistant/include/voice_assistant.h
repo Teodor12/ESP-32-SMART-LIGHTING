@@ -16,9 +16,9 @@ void start_voice_assistant(void);
         .voice_communication_init = false,                                                         \
         .voice_communication_agc_init = false,                                                     \
         .voice_communication_agc_gain = 15,                                                        \
-        .vad_mode = VAD_MODE_3,                                                                    \
-        .wakenet_model_name = "wn9_hiesp",                                                         \
-        .wakenet_mode = DET_MODE_2CH_90,                                                           \
+        .vad_mode = VAD_MODE_4,                                                                    \
+        .wakenet_model_name = "wn9_alexa",                                                         \
+        .wakenet_mode = DET_MODE_2CH_95,                                                           \
         .afe_mode = SR_MODE_HIGH_PERF,                                                             \
         .afe_perferred_core = 0,                                                                   \
         .afe_perferred_priority = 5,                                                               \
