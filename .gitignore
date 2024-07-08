@@ -2,3 +2,5 @@
 build/
 managed_components/
 sdkconfig.old
+.idea
+cmake-build-debug
