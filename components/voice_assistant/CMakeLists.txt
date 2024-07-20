@@ -1,13 +1,5 @@
+set(requires log esp-sr )
 
-set(requires
-    log
-    esp-sr
-    )
-
-set(priv_requires
-    hardware_driver
-    led_indicator
-    pwm_output
-    )
+set(priv_requires hardware_driver led_indicator pwm_output)
 
 idf_component_register(SRCS "voice_assistant.c" INCLUDE_DIRS "include" REQUIRES ${requires} PRIV_REQUIRES ${priv_requires})

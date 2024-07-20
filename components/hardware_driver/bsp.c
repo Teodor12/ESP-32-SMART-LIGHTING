@@ -1,10 +1,11 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/semphr.h"
-#include "bsp.h"
 #include "esp_log.h"
-#include "esp32_s3_devkitc_config.h"
 #include "driver/i2s_std.h"
 #include "driver/i2s_common.h"
+
+#include "esp32_s3_devkitc_config.h"
+#include "bsp.h"
 
 #define TAG "bsp"
 
