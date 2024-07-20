@@ -24,7 +24,7 @@ static esp_err_t i2s_init(i2s_port_t i2s_port_num, uint32_t sample_rate, int cha
 
     ESP_ERROR_CHECK(init_i2s_mutex());
 
-    xSemaphoreTake(i2s_mutex, pdMS_TO_TICKS(0));
+    xSemaphoreTake(i2s_mutex, pdMS_TO_TICKS(1));
 
     /* Specifiy I2S role and i2s port*/
     i2s_chan_config_t channel_cfg = I2S_CHANNEL_DEFAULT_CONFIG(i2s_port_num, I2S_ROLE_MASTER);
@@ -81,7 +81,7 @@ static esp_err_t i2s_deinit(i2s_port_t i2s_num)
 {
     esp_err_t ret = ESP_OK;
 
-    xSemaphoreTake(i2s_mutex, pdMS_TO_TICKS(0));
+    xSemaphoreTake(i2s_mutex, pdMS_TO_TICKS(1));
     ret |= i2s_channel_disable(rx_handle);
     ret |= i2s_del_channel(rx_handle);
     rx_handle = NULL;

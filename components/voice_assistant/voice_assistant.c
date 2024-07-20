@@ -51,7 +51,7 @@ static esp_err_t sr_flash_models(void)
 {
     ESP_ERROR_CHECK(init_sr_mutex());
 
-    xSemaphoreTake(sr_init_mutex, pdMS_TO_TICKS(0));
+    xSemaphoreTake(sr_init_mutex, pdMS_TO_TICKS(1));
 
     /* Load models from the proper SPIFFS partition of the flash memory */
     srmodel_list_t *models = esp_srmodel_init("model");
