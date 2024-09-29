@@ -2668,6 +2668,28 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 58.42) (xy 72.39 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 255 0 0 1)
+		)
+		(uuid "4e20bcb1-f995-44a5-8cb0-663387777d01")
+	)
+	(wire
+		(pts
+			(xy 81.28 62.23) (xy 81.28 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 0 0 1)
+		)
+		(uuid "4e48e509-c272-4b8d-8e00-cc110c56ed41")
+	)
+	(wire
+		(pts
 			(xy 72.39 101.6) (xy 72.39 102.87)
 		)
 		(stroke
@@ -2690,6 +2712,17 @@
 	)
 	(wire
 		(pts
+			(xy 85.09 50.8) (xy 85.09 58.42)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 255 0 0 1)
+		)
+		(uuid "5e18f35b-4fa1-4809-9d5e-0b3e0067346e")
+	)
+	(wire
+		(pts
 			(xy 191.77 73.66) (xy 191.77 116.84)
 		)
 		(stroke
@@ -2697,17 +2730,6 @@
 			(type default)
 		)
 		(uuid "5e755b6e-f741-43a8-a8d4-647a5cf1a80e")
-	)
-	(wire
-		(pts
-			(xy 81.28 58.42) (xy 72.39 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(uuid "600ff5cd-f008-4da0-a5c4-f6da264d6732")
 	)
 	(wire
 		(pts
@@ -2740,17 +2762,6 @@
 			(color 255 0 0 1)
 		)
 		(uuid "6a3428ea-eaeb-46ec-b9ac-4e486e0efa1d")
-	)
-	(wire
-		(pts
-			(xy 81.28 62.23) (xy 81.28 58.42)
-		)
-		(stroke
-			(width 0)
-			(type default)
-			(color 0 0 0 1)
-		)
-		(uuid "6ae13e0e-98b0-434c-828b-7fe41bc9b362")
 	)
 	(wire
 		(pts
@@ -2827,17 +2838,6 @@
 	)
 	(wire
 		(pts
-			(xy 72.39 55.88) (xy 81.28 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-			(color 255 0 0 1)
-		)
-		(uuid "7ee1ddaa-551f-4022-a86b-bff53e07a71a")
-	)
-	(wire
-		(pts
 			(xy 80.01 132.08) (xy 101.6 132.08)
 		)
 		(stroke
@@ -2899,6 +2899,17 @@
 			(type default)
 		)
 		(uuid "9ac8c4f5-51a7-4349-bb34-2b45d84ebd7b")
+	)
+	(wire
+		(pts
+			(xy 81.28 55.88) (xy 72.39 55.88)
+		)
+		(stroke
+			(width 0)
+			(type default)
+			(color 0 0 0 1)
+		)
+		(uuid "9d786914-e4e9-496f-a7a8-416f56e72c56")
 	)
 	(wire
 		(pts
@@ -3142,17 +3153,6 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 55.88) (xy 81.28 50.8)
-		)
-		(stroke
-			(width 0)
-			(type default)
-			(color 255 0 0 1)
-		)
-		(uuid "f3cbebf5-b186-4ab6-b6de-800c2b3f415c")
-	)
-	(wire
-		(pts
 			(xy 80.01 88.9) (xy 99.06 88.9)
 		)
 		(stroke
@@ -3253,16 +3253,15 @@
 	)
 	(symbol
 		(lib_id "power:+12V")
-		(at 81.28 50.8 0)
+		(at 85.09 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "0068db04-0964-4077-a03d-b93dd23b6792")
 		(property "Reference" "#PWR02"
-			(at 81.28 54.61 0)
+			(at 85.09 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3270,16 +3269,17 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+12V"
-			(at 81.28 45.72 0)
+		(property "Value" "+3.3V"
+			(at 81.534 45.72 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
-			(at 81.28 50.8 0)
+			(at 85.09 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3288,7 +3288,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 81.28 50.8 0)
+			(at 85.09 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3297,7 +3297,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+12V\""
-			(at 81.28 50.8 0)
+			(at 85.09 50.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3312,88 +3312,6 @@
 			(project ""
 				(path "/7f9fa52e-fc36-4793-b6cc-842ae6e38210"
 					(reference "#PWR02")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "INMP41:INMP41")
-		(at 72.39 121.92 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "17f92c90-57e5-41d4-b637-de4e2680005c")
-		(property "Reference" "U3"
-			(at 74.5841 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "INMP41"
-			(at 74.5841 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "INMP41:INMP41"
-			(at 72.39 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://invensense.tdk.com/products/analog/inmp411/"
-			(at 72.39 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 72.39 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "93df274a-adf0-4b0b-a3ba-3bdeb02b1223")
-		)
-		(pin "1"
-			(uuid "5114e77c-7239-4338-83c2-564d9fa6a8f4")
-		)
-		(pin "5"
-			(uuid "4f56c63b-f848-4116-b961-1747aaa0ea49")
-		)
-		(pin "4"
-			(uuid "9fccd4a4-b408-4694-828e-48ca427edda6")
-		)
-		(pin "6"
-			(uuid "ffe83865-c5a7-48a3-970f-e39c0005c5cb")
-		)
-		(pin "3"
-			(uuid "08798fa1-9002-42be-9348-e105a42e5224")
-		)
-		(instances
-			(project "ESP-32-SMART-LIGHTING"
-				(path "/7f9fa52e-fc36-4793-b6cc-842ae6e38210"
-					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -3875,6 +3793,88 @@
 		)
 	)
 	(symbol
+		(lib_id "INMP41:INMP41")
+		(at 72.39 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "55e6ec8b-df1b-4199-8159-013bf196ebe4")
+		(property "Reference" "U2"
+			(at 74.5841 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "INMP41"
+			(at 74.5841 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "INMP41:INMP41"
+			(at 72.39 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://invensense.tdk.com/products/analog/inmp411/"
+			(at 72.39 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 72.39 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "cd66fd4e-0690-475d-b26f-14a8bc2cd17c")
+		)
+		(pin "2"
+			(uuid "fd955f87-af3b-483f-946d-ae4b8173dd6a")
+		)
+		(pin "5"
+			(uuid "bc199f06-0755-4aaf-be99-5ed8ca6c5b8a")
+		)
+		(pin "1"
+			(uuid "271c3857-3a3a-44f3-95de-5f1fa973208e")
+		)
+		(pin "6"
+			(uuid "4615740f-92f5-4918-994c-727e411c8890")
+		)
+		(pin "4"
+			(uuid "d4fcca9a-2cf9-4365-ab96-6592af01d34c")
+		)
+		(instances
+			(project ""
+				(path "/7f9fa52e-fc36-4793-b6cc-842ae6e38210"
+					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Transistor_FET:IRLZ44N")
 		(at 220.98 116.84 0)
 		(unit 1)
@@ -4266,88 +4266,6 @@
 		)
 	)
 	(symbol
-		(lib_id "INMP41:INMP41")
-		(at 72.39 81.28 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "817ce236-fb58-48f0-bbc2-ca280dab2e0e")
-		(property "Reference" "U2"
-			(at 74.5841 80.01 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "INMP41"
-			(at 74.5841 82.55 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "INMP41:INMP41"
-			(at 72.39 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://invensense.tdk.com/products/analog/inmp411/"
-			(at 72.39 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 72.39 81.28 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "80fe33c5-215e-4f17-ace3-c2de2e8cb32c")
-		)
-		(pin "1"
-			(uuid "280f6278-a4d7-4cb8-8336-8c77f26a9e8a")
-		)
-		(pin "5"
-			(uuid "41c1400a-22bf-4984-b3e8-395eac12caf8")
-		)
-		(pin "4"
-			(uuid "b5247ad6-aa80-4808-9a87-34884a3b4f56")
-		)
-		(pin "6"
-			(uuid "7f3ba675-e864-42a2-bd2f-5d19aab97ec3")
-		)
-		(pin "3"
-			(uuid "c0341dda-28f5-4d63-9100-b2c43c0c8727")
-		)
-		(instances
-			(project ""
-				(path "/7f9fa52e-fc36-4793-b6cc-842ae6e38210"
-					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+3.3V")
 		(at 74.93 50.8 0)
 		(unit 1)
@@ -4355,7 +4273,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "876d39f0-12eb-468c-8c69-3e6a7e43ac21")
 		(property "Reference" "#PWR01"
 			(at 74.93 54.61 0)
@@ -4366,12 +4283,13 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+3.3V"
-			(at 74.93 45.72 0)
+		(property "Value" "+12V"
+			(at 71.628 46.228 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -4950,6 +4868,88 @@
 			(project "ESP-32-SMART-LIGHTING"
 				(path "/7f9fa52e-fc36-4793-b6cc-842ae6e38210"
 					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "INMP41:INMP41")
+		(at 72.39 121.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "db3b1c5b-5bc2-4af9-8c2b-8f9380dc1531")
+		(property "Reference" "U3"
+			(at 74.5841 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "INMP41"
+			(at 74.5841 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "INMP41:INMP41"
+			(at 72.39 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://invensense.tdk.com/products/analog/inmp411/"
+			(at 72.39 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 72.39 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "9cd19978-d05a-4ad2-af26-46625327464a")
+		)
+		(pin "2"
+			(uuid "cc8bc53c-fcf8-42c5-9576-a74889160a75")
+		)
+		(pin "5"
+			(uuid "ad93e557-2541-4780-bbe1-77af23b768d9")
+		)
+		(pin "1"
+			(uuid "9ea22bed-9dd8-4065-9d65-87a9d20f3e6d")
+		)
+		(pin "6"
+			(uuid "bb7518a0-3f14-4a59-aba1-40f99916dc3f")
+		)
+		(pin "4"
+			(uuid "ca587226-d4a3-4281-b839-0239899f991b")
+		)
+		(instances
+			(project "ESP-32-SMART-LIGHTING"
+				(path "/7f9fa52e-fc36-4793-b6cc-842ae6e38210"
+					(reference "U3")
 					(unit 1)
 				)
 			)
